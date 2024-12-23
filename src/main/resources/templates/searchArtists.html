@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Artists</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Search Results for Artists</h1>
+</header>
+
+<section>
+    <h2>Artists Found:</h2>
+    <ul>
+        <li th:each="artist : ${listOfArtists}">
+            <input type="radio" name="artistId" th:value="${artist.id}" required>
+            <span th:text="${artist.firstName} + ' ' + ${artist.lastName} + ' - ' + ${artist.bio}"></span>
+        </li>
+        <li th:if="${#lists.isEmpty(listOfArtists)}">No artists found for the search query.</li>
+    </ul>
+</section>
+
+<!-- Back to Artists List -->
+<div>
+    <a th:href="@{/artists(trackId=${trackId})}">
+        <button type="button">Back to All Artists</button>
+    </a>
+</div>
+</body>
+</html>

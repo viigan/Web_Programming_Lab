@@ -1,0 +1,27 @@
+-- Populate ARTIST table
+INSERT INTO ARTIST (ID, BIO, FIRST_NAME, LAST_NAME) VALUES
+(1, 'Famous rock artist', 'John', 'Doe'),
+(2, 'Award-winning pop artist', 'Jane', 'Smith'),
+(3, 'Renowned jazz musician', 'Miles', 'Davis');
+
+-- Populate ALBUM table
+INSERT INTO ALBUM (ID, GENRE, NAME, RELEASE_YEAR) VALUES
+(1, 'Rock', 'Greatest Hits', 1999),
+(2, 'Pop', 'Top Charts', 2020),
+(3, 'Jazz', 'Classic Jazz', 1975);
+
+-- Populate SONG table
+INSERT INTO SONG (ID, TITLE, GENRE, RELEASE_YEAR, ALBUM_ID, TRACK_ID) VALUES
+(1, 'Rock Anthem', 'Rock', 1999, 1, 101),
+(2, 'Pop Ballad', 'Pop', 2020, 2, 102),
+(3, 'Jazz Classic', 'Jazz', 1975, 3, 103),
+(4, 'Another Rock Hit', 'Rock', 1999, 1, 104),
+(5, 'Party Pop Song', 'Pop', 2020, 2, 105);
+
+-- Populate SONG_ARTIST table
+INSERT INTO SONG_ARTIST (SONG_ID, ARTIST_ID) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 1),
+(5, 2);

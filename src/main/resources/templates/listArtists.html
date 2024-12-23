@@ -1,0 +1,188 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Add new Performer to Song</title>-->
+<!--    <style type="text/css">-->
+<!--        body {-->
+<!--            width: 800px;-->
+<!--            margin: auto;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<header>-->
+<!--    <h1>Select the Artist to Add to the List of Performers</h1>-->
+<!--</header>-->
+
+<!--&lt;!&ndash; Form for adding an artist to the song &ndash;&gt;-->
+<!--<form method="post" th:action="@{/artists/add-to-song}">-->
+<!--    &lt;!&ndash; Pass the trackId &ndash;&gt;-->
+<!--    <input type="hidden" name="trackId" th:value="${trackId}">-->
+<!--    <input type="hidden" name="artistId" th:value="${artistId}">-->
+
+<!--    <section>-->
+<!--        <h2>Select artist:</h2>-->
+<!--        <ul>-->
+<!--            &lt;!&ndash; Loop through the list of artists &ndash;&gt;-->
+<!--            <li th:each="artist : ${listOfArtists}">-->
+<!--                <input type="radio" name="artistId" th:value="${artist.id}" required>-->
+<!--                <span th:text="${artist.firstName} + ' ' + ${artist.lastName} + ' - ' + ${artist.bio}"></span>-->
+<!--            </li>-->
+<!--        </ul>-->
+
+
+<!--        <br>-->
+<!--        &lt;!&ndash; Add artist to the song &ndash;&gt;-->
+<!--        <button type="submit">Add Artist</button>-->
+<!--    </section>-->
+<!--</form>-->
+
+<!--&lt;!&ndash; Buttons for showing Song Details and Artist Details &ndash;&gt;-->
+<!--<div>-->
+<!--    <a th:href="@{/songs/details(trackId=${trackId})}">-->
+<!--        <button type="button">View Song Details</button>-->
+<!--    </a>-->
+<!--    <a th:href="@{/artists/details/(artistId=${id})}">-->
+
+<!--&lt;!&ndash;        <a th:href="@{'/artists/details/{id}' (id=${artistId})}">&ndash;&gt;-->
+
+
+<!--        <button type="button">View Artist Details</button>-->
+<!--    </a>-->
+
+<!--    <form method="get" th:action="@{/artists/search}">-->
+<!--        <input type="hidden" name="trackId" th:value="${trackId}">-->
+<!--        <input type="text" name="searchQuery" placeholder="Search by name or description">-->
+<!--        <button type="submit">Search</button>-->
+<!--    </form>-->
+
+
+
+
+
+
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new Performer to Song</title>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="btn btn-danger">Logout</button>
+    </form>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        header {
+            text-align: center;
+            margin: 20px 0;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        form, .actions {
+            background: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            text-transform: uppercase;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        a button {
+            text-decoration: none;
+            display: inline-block;
+        }
+        input[type="text"], input[type="number"], input[type="search"] {
+            padding: 10px;
+            width: calc(100% - 22px);
+            margin: 5px 0 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Select the Artist to Add to the List of Performers</h1>
+</header>
+
+<!-- Form for adding an artist to the song -->
+<form method="post" th:action="@{/artists/add-to-song}">
+    <!-- Pass the trackId -->
+    <input type="hidden" name="trackId" th:value="${trackId}">
+
+<!--    <input type="hidden" name="artistId" th:value="${artistId}">-->
+
+
+    <section>
+        <h2>Select artist:</h2>
+        <ul>
+            <!-- Loop through the list of artists -->
+            <li th:each="artist : ${listOfArtists}">
+                <input type="radio" name="artistId" th:value="${artist.id}" required>
+                <span th:text="${artist.firstName} + ' ' + ${artist.lastName} + ' - ' + ${artist.bio}"></span>
+            </li>
+        </ul>
+
+
+        <br>
+        <!-- Add artist to the song -->
+        <button type="submit">Add Artist</button>
+    </section>
+</form>
+
+<!-- Buttons for showing Song Details and Artist Details -->
+<div>
+    <a th:href="@{/songs/details(trackId=${trackId})}">
+        <button type="button">View Song Details</button>
+    </a>
+    <a th:href="@{/artists/details(artistId=${listOfArtists[0]?.id})}">
+        <button type="button">View Artist Details</button>
+    </a>
+
+    <form method="get" th:action="@{/artists/search}">
+        <input type="hidden" name="trackId" th:value="${trackId}">
+        <input type="text" name="searchQuery" placeholder="Search by name or description">
+        <button type="submit">Search</button>
+    </form>
+
+
+
+
+
+</div>
+</body>
+</html>
+

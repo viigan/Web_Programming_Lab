@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Artist Details</title>
+</head>
+<body>
+<header>
+    <h1 th:text="'Artist: ' + ${artist.firstName} + ' ' + ${artist.lastName}"></h1>
+</header>
+<section>
+    <p><b>Bio:</b> <span th:text="${artist.bio}"></span></p>
+</section>
+<a href="/artists">Back to Artists</a>
+</body>
+</html>

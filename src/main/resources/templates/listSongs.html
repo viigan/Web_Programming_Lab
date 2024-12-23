@@ -1,0 +1,159 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Song List</title>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="btn btn-danger">Logout</button>
+    </form>
+
+    <li class="nav-item">
+<!--        <a href="#" class="btn btn-light btn-sm ml-3" th:text="${session.user.username}">-->
+        <a>
+        <!-- Placeholder text for fallback -->
+            User
+        </a>
+    </li>
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px auto;
+            max-width: 800px;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            padding: 10px;
+            background: #f9f9f9;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        li:hover {
+            background: #e9f7e9;
+        }
+        span {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        a {
+            color: #007BFF;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .add-song {
+            display: block;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .add-song a {
+            color: white;
+            background: #007BFF;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        #visiblee{
+
+        }
+        #visiblee2{
+
+        }
+        .add-song a:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<h1>List of Songs</h1>
+
+<!--&lt;!&ndash; Display error message if exists &ndash;&gt;-->
+<!--<div th:if="${error}">-->
+<!--    <p style="color: red;" th:text="${error}"></p>-->
+<!--</div>-->
+
+<!-- Form to select a song -->
+<form method="get" th:action="@{/artists}">
+    <ul>
+        <li th:each="song : ${songs}">
+            <!-- Radio button to select a song -->
+            <input type="radio" name="trackId" th:value="${song.trackId}" required>
+
+            <!-- Display song details -->
+            <span th:text="'Title: ' + ${song.title} + ', Genre: ' + ${song.genre} + ', Year: ' + ${song.releaseYear}"></span>
+            <span th:text="'Album: ' + ${song.album.name}"></span>
+
+            <!-- Edit and delete links -->
+<!--            <a th:href="@{/songs/edit/{id}(id=${song.id})}">Edit</a>-->
+<!--            <a th:href="@{/songs/delete/{id}(id=${song.id})}">Delete</a>-->
+
+
+
+                <a id="visiblee" sec:authorize="hasAuthority('ADMIN')" th:href="@{/songs/edit/{id}(id=${song.id})}" >Edit</a>
+
+            <a id="visiblee2" sec:authorize="hasAuthority('ADMIN')" th:href="@{/songs/delete/{id}(id=${song.id})}">Delete</a>
+
+
+
+
+        </li>
+    </ul>
+
+    <!-- Submit button for the selected song -->
+    <button type="submit">Select Song</button>
+</form>
+
+<!--<a href="/songs/add-form">Add New Song</a>-->
+<a sec:authorize="hasRole('ADMIN')" href="/songs/add">Add Song</a>
+
+<!--<a sec:authorize="hasAuthority('ADMIN')" href="@{/songs/add}" class="btn btn-primary">Add Song</a>-->
+
+
+
+
+
+<!--<span th:text="'Album: ' + ${song.album.name}"></span>-->
+<!--<a th:href="@{/albums/{id}(id=${song.album.id})}">View Album</a>-->
+
+</body>
+</html>
